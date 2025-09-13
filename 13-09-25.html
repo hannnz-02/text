@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Graduation Wishes Slider - Mobile Friendly</title>
+<style>
+  
+  body {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    font-family: 'Arvo', serif;
+    height: 100vh;
+    margin: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    padding: 10px;
+  }
+  .slider {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    max-width: 250px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    user-select: none;
+  }
+  h1 {
+    font-size: 1.6em;
+    margin-bottom: 0.3em;
+  }
+  h2 {
+    font-size: 1.5em;
+    margin-top: 0.1em;
+    margin-bottom: 0.3em;
+  }
+  p {
+    font-size: 1.1em;
+    line-height: 1.4em;
+    min-height: 75px;
+  }
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  button {
+    background: #66a6ff;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    flex: 1;
+    max-width: 120px;
+  }
+  button:hover,
+  button:focus {
+    background: #3a7bd5;
+    outline: none;
+  }
+
+  /* Buat tombol lebih besar di layar kecil */
+  @media (max-width: 360px) {
+    button {
+      font-size: 1em;
+      padding: 14px 18px;
+      max-width: 100px;
+    }
+    h1 {
+      font-size: 1.8em;
+    }
+    p {
+      font-size: 1em;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="slider" tabindex="0" aria-label="Graduation wishes slider">
+    <h1>Happy Graduation Chaerunnisah!!</h1>
+    <h2></h2>
+    <p id="slideText">
+    <img src="https://i.pinimg.com/236x/14/dd/5a/14dd5aa8ce6d380fb67d57154a006704.jpg" style="max-width:100%; height:auto;" />
+    </p>
+
+    <div class="controls">
+      <button id="prevBtn" aria-label="Previous wish">Prev</button>
+      <button id="nextBtn" aria-label="Next wish">Next</button>
+    </div>
+  </div>
+
+<script>
+  const wishes = [
+    "Sukses dan bahagia, selalu menyertai setiap langkahmu setelah ini",
+    "You did great!!",
+    "I'm so proud of you",
+    "Semoga kedepannya kamu bisa jadi orang yang bermanfaat buat diri sendiri dan orang lain",
+  ];
+
+  const slideText = document.getElementById('slideText');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let currentIndex = 0;
+  let slideInterval = null;
+
+  function showSlide(index) {
+    currentIndex = (index + wishes.length) % wishes.length; // loop
+    slideText.textContent = wishes[currentIndex];
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function startAutoSlide() {
+    slideInterval = setInterval(nextSlide, slideDuration);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(slideInterval);
+    startAutoSlide();
+  }
+
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetAutoSlide();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetAutoSlide();
+  });
+
+  startAutoSlide();
+  showSlide(currentIndex);
+</script>
+
+</body>
+</html>
